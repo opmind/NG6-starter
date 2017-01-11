@@ -18,7 +18,7 @@
       else backEndUrlPrefix = "";
     </script>
   </head>
-  <body ng-controller="appCtrl" ng-app="myApp" ng-class="appService.bodyclass">
+  <body ng-controller="appCtrl" ng-app="app" ng-class="appService.bodyclass">
 
   <div  id="main-wrapper" layout="column" layout-fill>
 
@@ -91,12 +91,10 @@
 
     <section layout="row" flex="">
 
-      <left-toolbar-content></left-toolbar-content>
+      <toolbar-left-content></toolbar-left-content>
       <md-content  flex="" layout-padding="">
         <div class="container-fluid" >
-          <p ng-controller='crampCtrl'>
-            <a  ng-repeat="(key, value) in cramps" ng-href="{{value}}" ng-cloak>/{{key}}</a>
-          </p>
+          <cramp-component></cramp-component>
           <div class="row">
             <!--<button     ng-disabled="!appService.deleteReady" ng-click="appService.alarm(appService.deleteReady)">deleteReady</button>-->
             <div ng-view=""></div>
@@ -105,7 +103,7 @@
         <div flex=""></div>
       </md-content>
       <!--ng-show="currentNavItem != '/home/tree/charts' "-->
-      <md-sidenav  class="md-sidenav-right md-whiteframe-4dp"  md-is-locked-open="toggleRight()" md-component-id="right" style="height: calc(100vh - 64px)">
+      <md-sidenav  class="md-sidenav-right md-whiteframe-4dp"  md-is-locked-open="true" md-component-id="right" style="height: calc(100vh - 64px)">
 
         <right-toolbar-content></right-toolbar-content>
       </md-sidenav>

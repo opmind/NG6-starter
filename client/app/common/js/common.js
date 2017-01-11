@@ -3,7 +3,7 @@ import Navbar from '../components/navbar/navbar';
 import Hero from '../components/hero/hero';
 import User from '../components/user/user';
 
-let commonModule = angular.module('app.common', [
+let commonModule = angular.module('myApp.common', [
   Navbar,
   Hero,
   User
