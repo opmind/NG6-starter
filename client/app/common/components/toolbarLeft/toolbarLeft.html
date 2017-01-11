@@ -1,0 +1,61 @@
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="toggleLeft()" md-whiteframe="4" style="height: calc(100vh - 64px)">
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+    </md-toolbar>
+    <md-content layout-padding="">
+        <div class="padded" md-whiteframe="1"   flex="" >
+            <form name="editableForm" editable-form blur="cancel" onbeforesave="saveObject()">
+                <div ng-repeat="key in toolbarLeftService.itemFields" ng-if="!appService.containId(key) && !appService.forbiddenName(key)">
+                    <span ng-show="editableForm.$visible" style="color: #299E30">{{key}}</span>
+                    <div editable-text="toolbarLeftService.rightItem[key]" e-name="value" e-style="width: 270px">
+                        <span style="color: #299E30">{{key}}</span>: {{toolbarLeftService.rightItem[key]}}
+                    </div>
+                </div>
+                <div ng-repeat="ids in appService.ids">
+                    <div ng-if="toolbarLeftService.rightItem[ids][ids] ">
+
+                        <span ng-show="editableForm.$visible" style="color: #299E30">{{appService.objectHeader[ids]}}:</span>
+                        <div href="#" editable-select="toolbarLeftService.rightItem[ids][ids]" e-ng-options="g.id as g.name for g in appService.idList[ids]"  e-style="width: 270px">
+                            <span style="color: #299E30">{{appService.objectHeader[ids]}}</span>:  {{ toolbarLeftService.rightItem[ids][appService.objectName[ids]] }}
+                        </div>
+                    </div>
+                    <div ng-if="toolbarLeftService.rightItem.parentid[ids]">
+                        <span ng-show="editableForm.$visible" style="color: #299E30">{{appService.objectHeader[ids]}}:</span>
+
+                        <div href="#" editable-select="toolbarLeftService.rightItem.parentid[ids]" e-ng-options="g.id as g.name for g in appService.idList[ids] | filter : '!{{toolbarLeftService.rightItem.rubricid}}'" e-style="width: 270px" e-ng-if="g.rubricid = toolbarLeftService.rightItem.rubricid">
+                            <span style="color: #299E30">{{appService.objectHeader[ids]}}</span>:  {{ toolbarLeftService.rightItem.parentid[appService.objectName[ids]] }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="buttons  ">
+                    <md-button type="button" ng-click="objectViewService.getCurrentObject(); editableForm.$show(); getObject(toolbarLeftService.rightItem); getObjectById(toolbarLeftService.rightItem.objectid); getRubricById(toolbarLeftService.rightItem.rubricid);getRubricId()" ng-show="!editableForm.$visible">
+                        Edit
+                    </md-button>
+                    <div>
+                    </div>
+
+                    <!-- buttons to submit / cancel form -->
+                    <span ng-show="editableForm.$visible">
+                <md-button type="submit" class="md-primary" ng-disabled="editableForm.$waiting">
+                  Save
+                </md-button>
+                <md-button type="button" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                  Cancel
+                </md-button>
+
+            </span>
+                    <!--<md-button type="button" ng-disabled="editableForm.$waiting" ng-click="$route.reload()">-->
+                    <!--routeReload-->
+                    <!--</md-button>-->
+                </div>
+
+            </form>
+        </div>
+        <p></p>
+        <a  ng-click="currentActiveObj(rightItem); settoolbarLeftService(); toggleRight('turn'); toggleLeft('open'); toolbarLeftService.changeURL(toolbarLeftService.rightItem)"  tabindex="1" ng-keydown="currentActiveObj(rightItem); settoolbarLeftService(); toggleRight('turn'); toggleLeft('open'); toolbarLeftService.changeURL(toolbarLeftService.rightItem)">
+            Страница объекта
+        </a>
+
+    </md-content>
+</md-sidenav>
