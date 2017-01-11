@@ -27,7 +27,6 @@ let resolveToApp = (glob = '') => {
 let resolveToComponents = (glob = '') => {
   return path.join(root, 'app/components', glob); // app/components/{glob}
 };
-
 // map of all paths
 let paths = {
   js: resolveToComponents('**/*!(.spec.js).js'), // exclude spec files
